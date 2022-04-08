@@ -7,7 +7,7 @@ package proyectoarqempresarial;
 
 /**
  *
- * @author Carlos
+ * @author Mario
  */
 public class ProyectoArqEmpresarial {
 
