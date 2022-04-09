@@ -7,7 +7,7 @@ package interfaces;
 
 /**
  *
- * @author Carlos
+ * @author Mario
  */
 public class CitasMedicasFrm extends javax.swing.JFrame {
 
@@ -27,21 +27,86 @@ public class CitasMedicasFrm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bAgendar = new javax.swing.JButton();
+        bDetalles = new javax.swing.JButton();
+        bPermitirAcceso = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        bAgendar.setText("Agendar Cita");
+        bAgendar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAgendarActionPerformed(evt);
+            }
+        });
+
+        bDetalles.setText("Detalles de Cita");
+        bDetalles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bDetallesActionPerformed(evt);
+            }
+        });
+
+        bPermitirAcceso.setText("Permitir Acceso a expediente");
+        bPermitirAcceso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bPermitirAccesoActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Cerrar sesión");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(147, 147, 147)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bDetalles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bAgendar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bPermitirAcceso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(bAgendar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bDetalles)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bPermitirAcceso)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgendarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bAgendarActionPerformed
+
+    private void bDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDetallesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bDetallesActionPerformed
+
+    private void bPermitirAccesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPermitirAccesoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bPermitirAccesoActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,5 +145,9 @@ public class CitasMedicasFrm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAgendar;
+    private javax.swing.JButton bDetalles;
+    private javax.swing.JButton bPermitirAcceso;
+    private javax.swing.JButton jButton4;
     // End of variables declaration//GEN-END:variables
 }

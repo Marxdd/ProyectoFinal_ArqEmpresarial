@@ -7,7 +7,7 @@ package interfaces;
 
 /**
  *
- * @author Carlos
+ * @author Mario
  */
 public class PacientesFrm extends javax.swing.JFrame {
 

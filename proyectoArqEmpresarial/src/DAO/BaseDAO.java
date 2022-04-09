@@ -5,10 +5,21 @@
  */
 package DAO;
 
+import java.util.List;
+
 /**
  *
- * @author Carlos
+ * @author Mario
  */
-public interface BaseDAO {
-    
+public interface BaseDAO<T> {
+     public abstract void agregar(T entidad);
+
+    public abstract void eliminar(T entidad);
+
+    public abstract void actualizar(T entidad);
+
+    public abstract T buscarPorId(Integer entidad);
+
+    public abstract List<T> mostrarTodas();
+
 }
