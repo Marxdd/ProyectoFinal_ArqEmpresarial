@@ -39,9 +39,7 @@
                 <h1 class="registros">Registros del paciente</h1>
                 <table id="tableCSS2">
                     <tr>
-                        <th>Folio</th>
                         <th>Fecha</th>
-                        <th>Ver</th>
                         <th>Archivo adjunto</th>
                     </tr>
                     <tr>
@@ -52,7 +50,7 @@
                     </tr>
                 </table>
                 <c:if test="${not empty doctor}">
-                    <input id="formFileSm" class="form-control form-control-sm" name="logotipo" type="file" accept="image/*"  required> 
+                    <input id="formFileSm" name="logotipo" type="file" accept="image/*"  required> 
                 </c:if>
             </div>
         </section>
