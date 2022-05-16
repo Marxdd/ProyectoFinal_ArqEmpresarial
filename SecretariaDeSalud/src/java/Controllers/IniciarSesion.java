@@ -7,12 +7,14 @@ package Controllers;
 
 import APIs.APIpacientes;
 import APIs.doctoresAPI;
+import APIs.pacientesAPI;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,7 +49,7 @@ public class IniciarSesion extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet IniciarSesion</title>");            
+            out.println("<title>Servlet IniciarSesion</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet IniciarSesion at " + request.getContextPath() + "</h1>");
@@ -82,32 +84,68 @@ public class IniciarSesion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-           String curp = request.getParameter("curp");
+        String curp = request.getParameter("curp");
         String contra = request.getParameter("contrasena");
-        String destino = "registro.html";
-        RequestDispatcher requestD = request.getRequestDispatcher(destino);
-        if (comprobarCredenciales(curp, contra)) {
-             requestD.forward(request, response);
-        }else{
-        try (PrintWriter out = response.getWriter()) {
-                out.println("<script type='text/javascript'>alert('Credenciales incorrectas');location='index.html';</script>");
-            }
-        
-        processRequest(request, response);
-        }
-    }
-
-    
-    private static boolean comprobarCredenciales(String curp,String contra){
-         doctoresAPI doc = new doctoresAPI();
+        String destino = "registroExpedientes.jsp";
+        String destinoAdmin = "listaExpedientes.jsp";
+        doctoresAPI doc = new doctoresAPI();
         String resultados = doc.findAll_JSON(String.class);
         APIpacientes pac = new APIpacientes();
         String resultados2 = pac.findAll_JSON(String.class);
-     //   System.out.println("doctores");
+        RequestDispatcher requestD;
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+
+        List<pruebaxD.Doctor> doctores = mapper.readValue(resultados, new TypeReference<List<pruebaxD.Doctor>>() {
+        });
+        List<pruebaxD.Paciente> pacientes = mapper.readValue(resultados2, new TypeReference<List<pruebaxD.Paciente>>() {
+        });
+        for (pruebaxD.Doctor doctore : doctores) {
+            if (contra.equalsIgnoreCase(doctore.getContraseña()) && curp.equalsIgnoreCase(doctore.getCurp())) {
+                 requestD = request.getRequestDispatcher(destinoAdmin);
+                request.setAttribute("doctor", doctore);
+                request.setAttribute("pacientes", pacientes);
+                requestD.forward(request, response);
+            }
+        }
+
+        for (pruebaxD.Paciente paciente : pacientes) {
+            if (contra.equalsIgnoreCase(paciente.getContraseña()) && curp.equalsIgnoreCase(paciente.getCurp())) {
+                 requestD = request.getRequestDispatcher(destino);
+                 pacientesAPI paci = new pacientesAPI();
+                 String resul = paci.findAll_JSON(String.class);
+                 List<pruebaxD.DocumentosPacientes> documentos = mapper.readValue(resul,new TypeReference<List<pruebaxD.DocumentosPacientes>>() {
+        });
+                 List<pruebaxD.DocumentosPacientes> documentosPaciente = new ArrayList();
+                 for (pruebaxD.DocumentosPacientes documento : documentos) {
+                     if (documento.getPaciente().getCurp().equals(paciente.getCurp())) {
+                         documentosPaciente.add(documento);
+                     }
+                }
+                request.setAttribute("documentos", documentosPaciente);
+                request.setAttribute("paciente", paciente);
+                requestD.forward(request, response);
+            }
+        }
+        try (PrintWriter out = response.getWriter()) {
+            out.println("<script type='text/javascript'>alert('Credenciales incorrectas');location='index.html';</script>");
+        }
+
+        processRequest(request, response);
+        
+    }
+
+    private static boolean comprobarCredenciales(String curp, String contra) {
+        doctoresAPI doc = new doctoresAPI();
+        String resultados = doc.findAll_JSON(String.class);
+        APIpacientes pac = new APIpacientes();
+        String resultados2 = pac.findAll_JSON(String.class);
+        //   System.out.println("doctores");
         ObjectMapper mapper = new ObjectMapper();
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         try {
-            List<pruebaxD.Doctor> doctores = mapper.readValue(resultados, new TypeReference<List<pruebaxD.Doctor>>() {});
+            List<pruebaxD.Doctor> doctores = mapper.readValue(resultados, new TypeReference<List<pruebaxD.Doctor>>() {
+            });
             //System.out.println(doctores);
             for (pruebaxD.Doctor doctore : doctores) {
                 if (contra.equalsIgnoreCase(doctore.getContraseña()) && curp.equalsIgnoreCase(doctore.getCurp())) {
@@ -115,9 +153,10 @@ public class IniciarSesion extends HttpServlet {
                 }
             }
             System.out.println("pacientes");
-            List<pruebaxD.Paciente> pacientes = mapper.readValue(resultados2, new TypeReference<List<pruebaxD.Paciente>>() {});
+            List<pruebaxD.Paciente> pacientes = mapper.readValue(resultados2, new TypeReference<List<pruebaxD.Paciente>>() {
+            });
             for (pruebaxD.Paciente paciente : pacientes) {
-                  if (contra.equalsIgnoreCase(paciente.getContraseña()) && curp.equalsIgnoreCase(paciente.getCurp())) {
+                if (contra.equalsIgnoreCase(paciente.getContraseña()) && curp.equalsIgnoreCase(paciente.getCurp())) {
                     return true;
                 }
             }
@@ -126,6 +165,7 @@ public class IniciarSesion extends HttpServlet {
         }
         return false;
     }
+
     /**
      * Returns a short description of the servlet.
      *

@@ -23,6 +23,116 @@ body{
     color: white;
 }
 
+.seccion2{
+    width: 880px;
+    height: 200px;
+    background: #5c8383;
+    margin: auto;
+    margin-top: 180px;
+    box-shadow: 7px 13px 37px #000;
+    padding: 20px 30px;
+    border-top: 30px solid darkslategrey ;
+    border-radius: 16px;
+    color: white;
+}
+
+h1.registros {
+    color: #f2f2f2;
+    font-weight: normal;
+    font-size: 40px;
+    font-family: Arial;
+    text-transform: uppercase;
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    alignment-adjust: auto;
+    font-weight: bold;
+}
+
+h1.datos{
+    color: #f2f2f2;
+    font-weight: normal;
+    font-size: 40px;
+    font-family: Arial;
+    text-transform: uppercase;
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    alignment-adjust: auto;
+    font-weight: bold;
+}
+
+#tableCSS2 {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#tableCSS2 td, #tableCSS2 th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#tableCSS2 tr:nth-child(odd){background-color: #d9d9d9;}
+#tableCSS2 tr:nth-child(even){background-color: #f2f2f2;}
+
+#tableCSS2 tr:hover {
+    background-color: #ffc4ab;
+    color: black;
+    transition: 110ms all;
+}
+
+#tableCSS2 th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: chocolate;
+    color: white;
+}
+
+#tableCSS2 td{
+    color: #000;
+}
+#tableCSS {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#tableCSS td, #tableCSS th {
+    border: 1px solid #000;
+    padding: 8px;
+}
+
+#tableCSS tr:nth-child(odd){background-color: #d9d9d9;}
+#tableCSS tr:nth-child(even){background-color: #f2f2f2;}
+
+#tableCSS tr:hover {
+    background-color: #b7d6b6;
+    color: black;
+    transition: 110ms all;
+}
+
+#tableCSS th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #2bad26;
+    color: white;
+}
+
+#tableCSS td{
+    color: black;
+}
+
 .subtitles{
     color: white;
     font-size: 16px;

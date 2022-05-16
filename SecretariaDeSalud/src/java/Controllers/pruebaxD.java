@@ -7,10 +7,13 @@ package Controllers;
 
 import APIs.APIpacientes;
 import APIs.doctoresAPI;
+import APIs.pacientesAPI;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,8 +28,25 @@ public class pruebaxD {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       
-       
+         ObjectMapper mapper = new ObjectMapper();
+        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        pacientesAPI paci = new pacientesAPI();
+                 String resul = paci.findAll_JSON(String.class);
+        try {
+            List<pruebaxD.DocumentosPacientes> documentos = mapper.readValue(resul,new TypeReference<List<pruebaxD.DocumentosPacientes>>() {
+            });
+            List<pruebaxD.DocumentosPacientes> documentosPaciente = new ArrayList();
+            for (DocumentosPacientes documento : documentos) {
+                if (documento.getPaciente().getCurp().equals("JOHN19034NJAS")) {
+                    documentosPaciente.add(documento);
+                }
+            }
+            System.out.println(documentosPaciente);
+            
+            
+        } catch (JsonProcessingException ex) {
+            Logger.getLogger(pruebaxD.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
 
        
@@ -228,6 +248,61 @@ public class pruebaxD {
         @Override
         public String toString() {
             return "Paciente{" + "apellidos=" + apellidos + ", contrase\u00f1a=" + contraseña + ", correo=" + correo + ", curp=" + curp + ", doctorAsignado=" + doctorAsignado + ", nombres=" + nombres + ", telefono=" + telefono + ", idpaciente=" + idpaciente + '}';
+        }
+        
+    }
+    
+    public static class DocumentosPacientes{
+        private String documentoPath;
+        private Date fechaCreacion;
+        private int iddocumentoPaciente;
+        private Paciente paciente;
+
+        public DocumentosPacientes() {
+        }
+
+        public DocumentosPacientes(String documentoPath, Date fechaCreacion, int iddocumentoPaciente, Paciente paciente) {
+            this.documentoPath = documentoPath;
+            this.fechaCreacion = fechaCreacion;
+            this.iddocumentoPaciente = iddocumentoPaciente;
+            this.paciente = paciente;
+        }
+
+        public String getDocumentoPath() {
+            return documentoPath;
+        }
+
+        public void setDocumentoPath(String documentoPath) {
+            this.documentoPath = documentoPath;
+        }
+
+        public Date getFechaCreacion() {
+            return fechaCreacion;
+        }
+
+        public void setFechaCreacion(Date fechaCreacion) {
+            this.fechaCreacion = fechaCreacion;
+        }
+
+        public int getIddocumentoPaciente() {
+            return iddocumentoPaciente;
+        }
+
+        public void setIddocumentoPaciente(int iddocumentoPaciente) {
+            this.iddocumentoPaciente = iddocumentoPaciente;
+        }
+
+        public Paciente getPaciente() {
+            return paciente;
+        }
+
+        public void setPaciente(Paciente paciente) {
+            this.paciente = paciente;
+        }
+
+        @Override
+        public String toString() {
+            return "DocumentosPacientes{" + "documentoPath=" + documentoPath + ", fechaCreacion=" + fechaCreacion + ", iddocumentoPaciente=" + iddocumentoPaciente + ", paciente=" + paciente + '}';
         }
         
     }
