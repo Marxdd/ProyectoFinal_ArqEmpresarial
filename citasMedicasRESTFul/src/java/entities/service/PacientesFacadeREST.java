@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entidades.service;
+package entities.service;
 
-import Entidades.Doctores;
+import entities.Pacientes;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -25,27 +25,27 @@ import javax.ws.rs.core.MediaType;
  * @author Carlos
  */
 @Stateless
-@Path("entidades.doctores")
-public class DoctoresFacadeREST extends AbstractFacade<Doctores> {
+@Path("entities.pacientes")
+public class PacientesFacadeREST extends AbstractFacade<Pacientes> {
 
-    @PersistenceContext(unitName = "HospitalGeneralRestFulPU")
+    @PersistenceContext(unitName = "citasMedicasRESTFulPU")
     private EntityManager em;
 
-    public DoctoresFacadeREST() {
-        super(Doctores.class);
+    public PacientesFacadeREST() {
+        super(Pacientes.class);
     }
 
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Doctores entity) {
+    public void create(Pacientes entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, Doctores entity) {
+    public void edit(@PathParam("id") Integer id, Pacientes entity) {
         super.edit(entity);
     }
 
@@ -58,21 +58,21 @@ public class DoctoresFacadeREST extends AbstractFacade<Doctores> {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Doctores find(@PathParam("id") Integer id) {
+    public Pacientes find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Doctores> findAll() {
+    public List<Pacientes> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Doctores> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Pacientes> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 
