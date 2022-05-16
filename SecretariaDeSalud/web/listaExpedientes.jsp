@@ -29,7 +29,7 @@
                 </tr>
                 <tr>
                     <c:choose>
-                        <c:when test="${doctor.ceudla}">
+                        <c:when test="${doctor.cedula}">
                     <c:forEach var="paciente" items="${pacientes}">     
                                 <td>${paciente.nombres}</td>
                                 <td>${paciente.apellidos}</td>                   
@@ -37,13 +37,19 @@
                                 <td>${paciente.correo}</td>
                                 <td>${paciente.telefono}</td>
                                 <c:if test="${paciente.doctorAsignado == doctor.curp}">
-                                <td><a href="comprobarHuella.jsp">Ver</a></td>
+                                <td>
+                                    <form action="abrirRegistroExpedientes" method="POST">
+                                    <input type="hidden" name="paciente" value="${paciente.idpaciente}" required >
+                                    <input type="hidden" name="doctor" value="${doctor.iddoctor}" required > 
+                                    <input type="submit" value="Ver" name="botonVer">
+                                    </form>
+                                 </td>
                                 </c:if>
                             <tr>
                     </c:forEach>
                         </c:when>
                     <c:otherwise>
-                        <td>No tiene acceso a ver la lista de cedulas</td>
+                        <td colspan="6">No tiene acceso a ver la lista de cedulas</td>
                     </c:otherwise>
                     </c:choose>
                 </tr>

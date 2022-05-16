@@ -51,6 +51,9 @@
                         </c:forEach>
                     </tr>
                 </table>
+                <c:if test="${not empty doctor}">
+                    <input id="formFileSm" class="form-control form-control-sm" name="logotipo" type="file" accept="image/*"  required> 
+                </c:if>
             </div>
         </section>
     </body>

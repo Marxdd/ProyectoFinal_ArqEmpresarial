@@ -28,25 +28,21 @@ public class pruebaxD {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        doctoresAPI doc = new doctoresAPI();
+        String resultados = doc.findAll_JSON(String.class);
          ObjectMapper mapper = new ObjectMapper();
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        pacientesAPI paci = new pacientesAPI();
-                 String resul = paci.findAll_JSON(String.class);
+
         try {
-            List<pruebaxD.DocumentosPacientes> documentos = mapper.readValue(resul,new TypeReference<List<pruebaxD.DocumentosPacientes>>() {
+            List<pruebaxD.Doctor> doctores = mapper.readValue(resultados, new TypeReference<List<pruebaxD.Doctor>>() {
             });
-            List<pruebaxD.DocumentosPacientes> documentosPaciente = new ArrayList();
-            for (DocumentosPacientes documento : documentos) {
-                if (documento.getPaciente().getCurp().equals("JOHN19034NJAS")) {
-                    documentosPaciente.add(documento);
-                }
+            for (Doctor doctore : doctores) {
+                System.out.println(doctore.getIddoctor());
             }
-            System.out.println(documentosPaciente);
-            
-            
         } catch (JsonProcessingException ex) {
             Logger.getLogger(pruebaxD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         
 
        
@@ -64,7 +60,7 @@ public class pruebaxD {
         String contraseña;
         String correo;
         String curp;
-        int idDoctor;
+        int iddoctor;
         String telefono;
         String nombre;
 
@@ -73,23 +69,23 @@ public class pruebaxD {
         public Doctor() {
         }
 
-        public Doctor(String apellido, boolean cedula, String contraseña, String correo, String curp, int idDoctor, String telefono, String nombre) {
+        public Doctor(String apellido, boolean cedula, String contraseña, String correo, String curp, int iddoctor, String telefono, String nombre) {
             this.apellido = apellido;
             this.cedula = cedula;
             this.contraseña = contraseña;
             this.correo = correo;
             this.curp = curp;
-            this.idDoctor = idDoctor;
+            this.iddoctor = iddoctor;
             this.telefono = telefono;
             this.nombre = nombre;
         }
 
-        public int getIdDoctor() {
-            return idDoctor;
+        public int getIddoctor() {
+            return iddoctor;
         }
 
-        public void setIdDoctor(int idDoctor) {
-            this.idDoctor = idDoctor;
+        public void setIddoctor(int iddoctor) {
+            this.iddoctor = iddoctor;
         }
         
 
@@ -153,7 +149,7 @@ public class pruebaxD {
 
         @Override
         public String toString() {
-            return "Doctor{" + "apellido=" + apellido + ", cedula=" + cedula + ", contrase\u00f1a=" + contraseña + ", correo=" + correo + ", curp=" + curp + ", idDoctor=" + idDoctor + ", telefono=" + telefono + ", nombre=" + nombre + '}';
+            return "Doctor{" + "apellido=" + apellido + ", cedula=" + cedula + ", contrase\u00f1a=" + contraseña + ", correo=" + correo + ", curp=" + curp + ", idDoctor=" + iddoctor + ", telefono=" + telefono + ", nombre=" + nombre + '}';
         }
         
     }
